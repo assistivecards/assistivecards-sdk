@@ -3585,6 +3585,7 @@ MonoBehaviour:
     rightToLeft: 0
     readproof: 0
   outputArea: {fileID: 109690162}
+  textures: []
   testTexture: {fileID: 0}
 --- !u!1 &540422844
 GameObject:

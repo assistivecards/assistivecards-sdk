@@ -128,7 +128,9 @@ language = GetLanguageByCode(languages, "en");
 
 ## GetPackImage
 
-Takes in a pack slug of type string as the first parameter and an image size of type integer as the second parameter. Returns an object of type Texture2D corresponding to the specified pack slug and image size.
+Takes in a pack slug of type string as the first parameter and an optional image size of type integer as the second parameter. Returns an object of type Texture2D corresponding to the specified pack slug and image size.
+
+> Default image size is 256x256
 
 ```Csharp
 async Task<Texture2D> GetPackImage(string packSlug, int imgSize)
@@ -143,7 +145,9 @@ texture = await GetPackImage("animals", 512);
 
 ## GetCardImage
 
-Takes in a pack slug of type string as the first parameter, a card slug of type string as the second parameter and an image size of type integer as the third parameter. Returns an object of type Texture2D corresponding to the specified pack slug, card slug and image size.
+Takes in a pack slug of type string as the first parameter, a card slug of type string as the second parameter and an optional image size of type integer as the third parameter. Returns an object of type Texture2D corresponding to the specified pack slug, card slug and image size.
+
+> Default image size is 256x256
 
 ```Csharp
 async Task<Texture2D> GetCardImage(string packSlug, string cardSlug, int imgSize)
@@ -175,9 +179,12 @@ texture = await GetActivityImage("brushing-teeth");
 
 ## GetAvatarImage
 
-Takes in an avatar ID of type string as the first parameter and an image size of type integer as the second parameter. Returns an object of type Texture2D corresponding to the specified avatar ID and image size.
+Takes in an avatar ID of type string as the first parameter and an optional image size of type integer as the second parameter. Returns an object of type Texture2D corresponding to the specified avatar ID and image size.
+
+> Default image size is 256x256
 
 > Note that avatar types have a maximum of 33 assets for the category "boy", 27 assets for the category "girl" and 29 assets for the category "misc".
+
 > <span style="color:crimson">e.g.</span> boy13, girl23, misc05
 
 ```Csharp
@@ -219,4 +226,38 @@ Example usage;
 ```Csharp
 Texture2D texture;
 texture = await GetAppIcon("leeloo");
+```
+
+## GetCardImagesByPack
+
+Takes in a language code of type string as the first parameter, a pack slug of type string as the second parameter and an optional image size of type integer as the third parameter. Returns an array of Texture2D objects corresponding to the specified language, pack slug and image size.
+
+> Default image size is 256x256
+
+```Csharp
+async Task<Texture2D[]> GetCardImagesByPack(string languageCode, string packSlug, int imgSize)
+```
+
+Example usage;
+
+```Csharp
+Texture2D[] textures;
+texture = await GetCardImagesByPack("en", "school", 512);
+```
+
+## GetAvatarImagesByCategory
+
+Takes in a category of type string as the first parameter and an optional image size of type integer as the second parameter. Returns an array of Texture2D objects corresponding to the specified category and image size.
+
+> Default image size is 256x256
+
+```Csharp
+async Task<Texture2D[]> GetAvatarImagesByCategory(string category, int imgSize)
+```
+
+Example usage;
+
+```Csharp
+Texture2D[] textures;
+texture = await GetAvatarImagesByCategory("misc",512);
 ```

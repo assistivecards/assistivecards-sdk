@@ -18,6 +18,8 @@ public class Test : MonoBehaviour
     [SerializeField] AssistiveCardsSDK.Language languageResult = new AssistiveCardsSDK.Language();
     AssistiveCardsSDK assistiveCardsSDK;
     public TMP_InputField outputArea;
+    [SerializeField] Texture2D[] cardTextures;
+    [SerializeField] Texture2D[] avatarTextures;
     [SerializeField] private Texture2D testTexture;
 
     private void Awake()
@@ -40,10 +42,12 @@ public class Test : MonoBehaviour
 
     private async void Start()
     {
-        testTexture = await assistiveCardsSDK.GetPackImage("animals", 512);
+        testTexture = await assistiveCardsSDK.GetPackImage("animals");
         packResult = assistiveCardsSDK.GetPackBySlug(packs, "animals");
         cardResult = assistiveCardsSDK.GetCardBySlug(cards, "bee");
         languageResult = assistiveCardsSDK.GetLanguageByCode(languages, "en");
         activityResult = assistiveCardsSDK.GetActivityBySlug(activities, "practicing-speaking");
+        cardTextures = await assistiveCardsSDK.GetCardImagesByPack("en", "school");
+        avatarTextures = await assistiveCardsSDK.GetAvatarImagesByCategory("misc");
     }
 }
