@@ -256,16 +256,10 @@ public class AssistiveCardsSDK : MonoBehaviour
         }
     }
 
-    public void DisplayCardsOnClick()
+    public async void DisplayCards()
     {
         var language = cardLanguageInput.text;
         var packSlug = cardPackSlugInput.text;
-        if (language != null && packSlug != null)
-            DisplayCards(language, packSlug);
-    }
-
-    public async void DisplayCards(string language, string packSlug)
-    {
         var result = await asyncGetCards(language, packSlug);
         outputArea.text = JsonUtility.ToJson(result);
     }
@@ -403,17 +397,11 @@ public class AssistiveCardsSDK : MonoBehaviour
         }
     }
 
-    public void DisplayAvatarImageOnClick()
+    public async void DisplayAvatarImage()
     {
         var id = avatarIdInput.text;
         int size = Int32.Parse(avatarImageSizeInput.text);
-        DisplayAvatarImage(id, size);
-    }
-
-    public async void DisplayAvatarImage(string avatarId, int imgSize = 256)
-    {
-
-        var texture = await asyncGetAvatarImage(avatarId, imgSize);
+        var texture = await asyncGetAvatarImage(id, size);
         rawImage.texture = texture;
     }
 
@@ -426,7 +414,7 @@ public class AssistiveCardsSDK : MonoBehaviour
         return result;
     }
 
-    private async Task<Texture2D> asyncGetAvatarImage(string avatarId, int imgSize)
+    private async Task<Texture2D> asyncGetAvatarImage(string avatarId, int imgSize = 256)
     {
         string uri = "";
         if (imgSize == 256)
@@ -457,17 +445,11 @@ public class AssistiveCardsSDK : MonoBehaviour
         }
     }
 
-    public void DisplayPackImageOnClick()
+    public async void DisplayPackImage()
     {
         var slug = packSlugInput.text;
         int size = Int32.Parse(packImageSizeInput.text);
-        DisplayPackImage(slug, size);
-    }
-
-    public async void DisplayPackImage(string packSlug, int imgSize = 256)
-    {
-
-        var texture = await asyncGetPackImage(packSlug, imgSize);
+        var texture = await asyncGetPackImage(slug, size);
         rawImage.texture = texture;
     }
 
@@ -480,7 +462,7 @@ public class AssistiveCardsSDK : MonoBehaviour
         return result;
     }
 
-    private async Task<Texture2D> asyncGetPackImage(string packSlug, int imgSize)
+    private async Task<Texture2D> asyncGetPackImage(string packSlug, int imgSize = 256)
     {
         string uri = "";
         if (imgSize == 256)
@@ -546,18 +528,12 @@ public class AssistiveCardsSDK : MonoBehaviour
         }
     }
 
-    public void DisplayCardImageOnClick()
+    public async void DisplayCardImage()
     {
         var packSlug = cardImagePackSlugInput.text;
-        var cardSlugSlug = cardImageCardSlugInput.text;
+        var cardSlug = cardImageCardSlugInput.text;
         int size = Int32.Parse(cardImageSizeInput.text);
-        DisplayCardImage(packSlug, cardSlugSlug, size);
-    }
-
-    public async void DisplayCardImage(string packSlug, string cardSlug, int imgSize = 256)
-    {
-
-        var texture = await asyncGetCardImage(packSlug, cardSlug, imgSize);
+        var texture = await asyncGetCardImage(packSlug, cardSlug, size);
         rawImage.texture = texture;
     }
 
@@ -570,7 +546,7 @@ public class AssistiveCardsSDK : MonoBehaviour
         return result;
     }
 
-    private async Task<Texture2D> asyncGetCardImage(string packSlug, string cardSlug, int imgSize)
+    private async Task<Texture2D> asyncGetCardImage(string packSlug, string cardSlug, int imgSize = 256)
     {
         string uri = "";
         if (imgSize == 256)
