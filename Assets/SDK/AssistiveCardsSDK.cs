@@ -9,21 +9,8 @@ using System.Threading.Tasks;
 
 public class AssistiveCardsSDK : MonoBehaviour
 {
-    public TMP_InputField outputArea;
-    public RawImage rawImage;
-    public TMP_InputField avatarImageSizeInput;
-    public TMP_InputField avatarIdInput;
-    public TMP_InputField packImageSizeInput;
-    public TMP_InputField packSlugInput;
-    public TMP_InputField cardImagePackSlugInput;
-    public TMP_InputField cardImageCardSlugInput;
-    public TMP_InputField cardImageSizeInput;
-    public TMP_InputField cardLanguageInput;
-    public TMP_InputField cardPackSlugInput;
-    public TMP_InputField languageCodeInput;
-    public TMP_InputField activitySlugInput;
-    public TMP_InputField cardBySlugInput;
-    public TMP_InputField packBySlugInput;
+    UIManager UIManager;
+    public Canvas canvas;
     private int boyAvatarArrayLength = 33;
     private int girlAvatarArrayLength = 27;
     private int miscAvatarArrayLength = 29;
@@ -215,17 +202,31 @@ public class AssistiveCardsSDK : MonoBehaviour
     public Languages languages = new Languages();
     public Apps apps = new Apps();
 
+    private async void Awake()
+    {
+        UIManager = canvas.GetComponent<UIManager>();
+        await CacheData();
+    }
+
+    public async Task CacheData()
+    {
+        packs = await GetPacks("en");
+        activities = await GetActivities("en");
+        languages = await GetLanguages();
+        apps = await GetApps();
+    }
+
     private void Start()
     {
-        cardImageSizeInput.text = "256";
-        avatarImageSizeInput.text = "256";
-        packImageSizeInput.text = "256";
+        UIManager.cardImageSizeInput.text = "256";
+        UIManager.avatarImageSizeInput.text = "256";
+        UIManager.packImageSizeInput.text = "256";
     }
 
     public async void DisplayPacks(string language)
     {
         var result = await asyncGetPacks(language);
-        outputArea.text = JsonUtility.ToJson(result);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -252,16 +253,17 @@ public class AssistiveCardsSDK : MonoBehaviour
             return null;
         else
         {
-            return packs = JsonUtility.FromJson<Packs>("{\"packs\":" + request.downloadHandler.text + "}");
+            var packs = JsonUtility.FromJson<Packs>("{\"packs\":" + request.downloadHandler.text + "}");
+            return packs;
         }
     }
 
     public async void DisplayCards()
     {
-        var language = cardLanguageInput.text;
-        var packSlug = cardPackSlugInput.text;
+        var language = UIManager.cardLanguageInput.text;
+        var packSlug = UIManager.cardPackSlugInput.text;
         var result = await asyncGetCards(language, packSlug);
-        outputArea.text = JsonUtility.ToJson(result);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -296,7 +298,7 @@ public class AssistiveCardsSDK : MonoBehaviour
     public async void DisplayActivities(string language)
     {
         var result = await asyncGetActivities(language);
-        outputArea.text = JsonUtility.ToJson(result);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -323,7 +325,8 @@ public class AssistiveCardsSDK : MonoBehaviour
             return null;
         else
         {
-            return activities = JsonUtility.FromJson<Activities>("{\"activities\":" + request.downloadHandler.text + "}");
+            var activities = JsonUtility.FromJson<Activities>("{\"activities\":" + request.downloadHandler.text + "}");
+            return activities;
         }
     }
 
@@ -331,7 +334,7 @@ public class AssistiveCardsSDK : MonoBehaviour
     public async void DisplayLanguages()
     {
         var result = await asyncGetLanguages();
-        outputArea.text = JsonUtility.ToJson(result);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -358,14 +361,15 @@ public class AssistiveCardsSDK : MonoBehaviour
             return null;
         else
         {
-            return languages = JsonUtility.FromJson<Languages>(request.downloadHandler.text);
+            var languages = JsonUtility.FromJson<Languages>(request.downloadHandler.text);
+            return languages;
         }
     }
 
     public async void DisplayActivityImage(string activitySlug)
     {
         var texture = await asyncGetActivityImage(activitySlug);
-        rawImage.texture = texture;
+        UIManager.rawImage.texture = texture;
     }
 
     ///<summary>
@@ -399,10 +403,10 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public async void DisplayAvatarImage()
     {
-        var id = avatarIdInput.text;
-        int size = Int32.Parse(avatarImageSizeInput.text);
+        var id = UIManager.avatarIdInput.text;
+        int size = Int32.Parse(UIManager.avatarImageSizeInput.text);
         var texture = await asyncGetAvatarImage(id, size);
-        rawImage.texture = texture;
+        UIManager.rawImage.texture = texture;
     }
 
     ///<summary>
@@ -447,10 +451,10 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public async void DisplayPackImage()
     {
-        var slug = packSlugInput.text;
-        int size = Int32.Parse(packImageSizeInput.text);
+        var slug = UIManager.packSlugInput.text;
+        int size = Int32.Parse(UIManager.packImageSizeInput.text);
         var texture = await asyncGetPackImage(slug, size);
-        rawImage.texture = texture;
+        UIManager.rawImage.texture = texture;
     }
 
     ///<summary>
@@ -496,7 +500,7 @@ public class AssistiveCardsSDK : MonoBehaviour
     public async void DisplayAppIcon(string appSlug)
     {
         var texture = await asyncGetAppIcon(appSlug);
-        rawImage.texture = texture;
+        UIManager.rawImage.texture = texture;
     }
 
     ///<summary>
@@ -530,11 +534,11 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public async void DisplayCardImage()
     {
-        var packSlug = cardImagePackSlugInput.text;
-        var cardSlug = cardImageCardSlugInput.text;
-        int size = Int32.Parse(cardImageSizeInput.text);
+        var packSlug = UIManager.cardImagePackSlugInput.text;
+        var cardSlug = UIManager.cardImageCardSlugInput.text;
+        int size = Int32.Parse(UIManager.cardImageSizeInput.text);
         var texture = await asyncGetCardImage(packSlug, cardSlug, size);
-        rawImage.texture = texture;
+        UIManager.rawImage.texture = texture;
     }
 
     ///<summary>
@@ -579,7 +583,7 @@ public class AssistiveCardsSDK : MonoBehaviour
     public async void DisplayApps()
     {
         var result = await asyncGetApps();
-        outputArea.text = JsonUtility.ToJson(result);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -603,8 +607,8 @@ public class AssistiveCardsSDK : MonoBehaviour
             return null;
         else
         {
-            outputArea.text = request.downloadHandler.text;
-            return apps = JsonUtility.FromJson<Apps>(request.downloadHandler.text);
+            var apps = JsonUtility.FromJson<Apps>(request.downloadHandler.text);
+            return apps;
         }
     }
 
@@ -623,8 +627,8 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public void DisplayPackBySlug()
     {
-        var result = GetPackBySlug(packs, packBySlugInput.text);
-        outputArea.text = JsonUtility.ToJson(result);
+        var result = GetPackBySlug(packs, UIManager.packBySlugInput.text);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -642,8 +646,8 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public void DisplayCardBySlug()
     {
-        var result = GetCardBySlug(cards, cardBySlugInput.text);
-        outputArea.text = JsonUtility.ToJson(result);
+        var result = GetCardBySlug(cards, UIManager.cardBySlugInput.text);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -661,8 +665,8 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public void DisplayActivityBySlug()
     {
-        var result = GetActivityBySlug(activities, activitySlugInput.text);
-        outputArea.text = JsonUtility.ToJson(result);
+        var result = GetActivityBySlug(activities, UIManager.activitySlugInput.text);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
@@ -680,8 +684,8 @@ public class AssistiveCardsSDK : MonoBehaviour
 
     public void DisplayLanguageByCode()
     {
-        var result = GetLanguageByCode(languages, languageCodeInput.text);
-        outputArea.text = JsonUtility.ToJson(result);
+        var result = GetLanguageByCode(languages, UIManager.languageCodeInput.text);
+        UIManager.outputArea.text = JsonUtility.ToJson(result);
     }
 
     ///<summary>
