@@ -21,4 +21,11 @@ public class UIManager : MonoBehaviour
     public TMP_InputField activitySlugInput;
     public TMP_InputField cardBySlugInput;
     public TMP_InputField packBySlugInput;
+
+    private void Start()
+    {
+        cardImageSizeInput.text = "256";
+        avatarImageSizeInput.text = "256";
+        packImageSizeInput.text = "256";
+    }
 }

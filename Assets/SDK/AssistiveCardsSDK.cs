@@ -216,13 +216,6 @@ public class AssistiveCardsSDK : MonoBehaviour
         apps = await GetApps();
     }
 
-    private void Start()
-    {
-        UIManager.cardImageSizeInput.text = "256";
-        UIManager.avatarImageSizeInput.text = "256";
-        UIManager.packImageSizeInput.text = "256";
-    }
-
     public async void DisplayPacks(string language)
     {
         var result = await asyncGetPacks(language);

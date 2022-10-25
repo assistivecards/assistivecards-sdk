@@ -44,15 +44,10 @@ public class Test : MonoBehaviour
         testTexture = await assistiveCardsSDK.GetPackImage("animals");
         cardTextures = await assistiveCardsSDK.GetCardImagesByPack("en", "school");
         avatarTextures = await assistiveCardsSDK.GetAvatarImagesByCategory("misc");
-        StartCoroutine("TestCoroutine");
-    }
-
-    IEnumerator TestCoroutine()
-    {
         packResult = assistiveCardsSDK.GetPackBySlug(assistiveCardsSDK.packs, "animals");
         //cardResult = assistiveCardsSDK.GetCardBySlug(cards, "bee");
         activityResult = assistiveCardsSDK.GetActivityBySlug(assistiveCardsSDK.activities, "practicing-speaking");
         languageResult = assistiveCardsSDK.GetLanguageByCode(assistiveCardsSDK.languages, "en");
-        yield return new WaitUntil(() => assistiveCardsSDK.CacheData().IsCompleted);
     }
+
 }
