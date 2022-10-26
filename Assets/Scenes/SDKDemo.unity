@@ -469,8 +469,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayCardBySlug
         m_Mode: 1
         m_Arguments:
@@ -1188,8 +1188,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayLanguageByCode
         m_Mode: 1
         m_Arguments:
@@ -1498,8 +1498,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayActivities
         m_Mode: 5
         m_Arguments:
@@ -3327,8 +3327,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayPackBySlug
         m_Mode: 1
         m_Arguments:
@@ -4706,8 +4706,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayAppIcon
         m_Mode: 5
         m_Arguments:
@@ -6441,8 +6441,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayCards
         m_Mode: 1
         m_Arguments:
@@ -6710,8 +6710,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayActivityBySlug
         m_Mode: 1
         m_Arguments:
@@ -6844,8 +6844,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayApps
         m_Mode: 1
         m_Arguments:
@@ -8702,8 +8702,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayCardImage
         m_Mode: 1
         m_Arguments:
@@ -9000,6 +9000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cce5cc3e3a7243a458d2208fa67211b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SDK: {fileID: 109690160}
   outputArea: {fileID: 109690162}
   rawImage: {fileID: 433960622}
   avatarImageSizeInput: {fileID: 1162247320}
@@ -9099,8 +9100,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayPackImage
         m_Mode: 1
         m_Arguments:
@@ -9233,8 +9234,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayActivityImage
         m_Mode: 5
         m_Arguments:
@@ -9420,8 +9421,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayAvatarImage
         m_Mode: 1
         m_Arguments:
@@ -10532,8 +10533,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayPacks
         m_Mode: 5
         m_Arguments:
@@ -11430,8 +11431,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 109690161}
-        m_TargetAssemblyTypeName: AssistiveCardsSDK, Assembly-CSharp
+      - m_Target: {fileID: 1593115926}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
         m_MethodName: DisplayLanguages
         m_Mode: 1
         m_Arguments:
