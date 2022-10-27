@@ -1,75 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
-using System.Linq;
+
 
 public class SettingsAPI : MonoBehaviour
 {
-    public TMP_InputField nicknameInputField;
-    public TMP_Text greetingMessage;
-    public Button selectAvatarButton;
-    public Toggle dailyReminderToggle;
-    public Toggle weeklyReminderToggle;
-    public Toggle usabilityTipsToggle;
-    public Toggle promotionsNotificationToggle;
-    public ToggleGroup languages;
     AssistiveCardsSDK assistiveCardsSDK;
     public GameObject SDK;
 
-    private string nickname;
-    private string language;
-    private string reminderPreference;
-    private bool isUsabilityTipsActive;
-    private bool isPromotionsNotificationActive;
-
-
-    private async void Awake()
+    private void Awake()
     {
         assistiveCardsSDK = SDK.GetComponent<AssistiveCardsSDK>();
-        nickname = GetNickname();
-        language = GetLanguage();
-        isUsabilityTipsActive = GetUsabilityTipsPreference() == 1 ? true : false;
-        isPromotionsNotificationActive = GetPromotionsNotificationPreference() == 1 ? true : false;
-        nicknameInputField.text = nickname;
-        selectAvatarButton.image.sprite = await GetAvatarImage();
     }
-    private void Start()
-    {
-        reminderPreference = GetReminderPreference();
-        usabilityTipsToggle.isOn = GetUsabilityTipsPreference() == 1 ? true : false;
-        promotionsNotificationToggle.isOn = GetPromotionsNotificationPreference() == 1 ? true : false;
-        foreach (var toggle in languages.GetComponentsInChildren<Toggle>())
-        {
-            if (toggle.name == language)
-            {
-                toggle.isOn = true;
-            }
-        }
-
-        greetingMessage.text = "Hello " + nickname + ", you have selected the language " + language + ". Your reminder period preference is " + reminderPreference + ". You " + (isUsabilityTipsActive ? "will" : "won't") + " receive usability tips. You " + (isPromotionsNotificationActive ? "will" : "won't") + " receive promotion notifications.";
-        if (reminderPreference == "Daily")
-        {
-            dailyReminderToggle.isOn = true;
-        }
-        else
-        {
-            weeklyReminderToggle.isOn = true;
-        }
-
-    }
-    private void Update()
-    {
-        nickname = GetNickname();
-        language = GetLanguage();
-        reminderPreference = GetReminderPreference();
-        isUsabilityTipsActive = GetUsabilityTipsPreference() == 1 ? true : false;
-        isPromotionsNotificationActive = GetPromotionsNotificationPreference() == 1 ? true : false;
-        greetingMessage.text = "Hello " + nickname + ", you have selected the language " + language + ". Your reminder period preference is " + reminderPreference + ". You " + (isUsabilityTipsActive ? "will" : "won't") + " receive usability tips. You " + (isPromotionsNotificationActive ? "will" : "won't") + " receive promotion notifications.";
-    }
-
     public void SetNickname(string nickname)
     {
         PlayerPrefs.SetString("Nickname", nickname);
@@ -133,12 +74,44 @@ public class SettingsAPI : MonoBehaviour
         return PlayerPrefs.GetInt("PromotionsNotificationPreference", 0);
     }
 
-    public void SaveSettings()
+    public void SetTTSPreference(string TTSPreference)
     {
-        SetNickname(nicknameInputField.text);
-        SetLanguage(languages.ActiveToggles().FirstOrDefault().GetComponentInChildren<Text>().text);
-        SetReminderPreference(dailyReminderToggle.isOn ? "Daily" : "Weekly");
-        SetUsabilityTipsPreference(usabilityTipsToggle.isOn ? 1 : 0);
-        SetPromotionsNotificationPreference(promotionsNotificationToggle.isOn ? 1 : 0);
+        PlayerPrefs.SetString("TTSPreference", TTSPreference);
     }
+
+    public string GetTTSPreference()
+    {
+        return PlayerPrefs.GetString("TTSPreference", "Alex");
+    }
+
+    public void SetHapticsPreference(int isHapticsActive)
+    {
+        PlayerPrefs.SetInt("HapticPreference", isHapticsActive);
+    }
+
+    public int GetHapticsPreference()
+    {
+        return PlayerPrefs.GetInt("HapticPreference", 0);
+    }
+
+    public void SetActivateOnPressInPreference(int isPressInActive)
+    {
+        PlayerPrefs.SetInt("ActivateOnPressInPreference", isPressInActive);
+    }
+
+    public int GetActivateOnPressInPreference()
+    {
+        return PlayerPrefs.GetInt("ActivateOnPressInPreference", 0);
+    }
+
+    public void SetVoiceGreetingPreference(int isVoiceGreetingActive)
+    {
+        PlayerPrefs.SetInt("VoiceGreetingPreference", isVoiceGreetingActive);
+    }
+
+    public int GetVoiceGreetingPreference()
+    {
+        return PlayerPrefs.GetInt("VoiceGreetingPreference", 0);
+    }
+
 }

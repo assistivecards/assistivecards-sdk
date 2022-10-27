@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +9,15 @@ public class AvatarButtonScript : MonoBehaviour
     private Texture2D avatarTexture;
     private Sprite sprite;
     SettingsAPI settingsAPI;
+    SettingsUIManager settingsUIManager;
+    [SerializeField] Canvas canvas;
 
 
     private void Awake()
     {
         assistiveCardsSDK = SDK.GetComponent<AssistiveCardsSDK>();
-        settingsAPI = Camera.main.GetComponent<SettingsAPI>();
+        settingsAPI = SDK.GetComponent<SettingsAPI>();
+        settingsUIManager = canvas.GetComponent<SettingsUIManager>();
     }
 
     async void Start()
@@ -28,7 +29,7 @@ public class AvatarButtonScript : MonoBehaviour
         gameObject.GetComponent<Button>().onClick.AddListener(async () =>
         {
             settingsAPI.SetAvatarImage(gameObject.name);
-            settingsAPI.selectAvatarButton.image.sprite = await settingsAPI.GetAvatarImage();
+            settingsUIManager.selectAvatarButton.image.sprite = await settingsAPI.GetAvatarImage();
         }
         );
     }
