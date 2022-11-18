@@ -1,0 +1,20 @@
+{
+    "name": "com.assistivecards.sdk",
+    "version": "1.0.0",
+    "description": "This package consists of methods for retrieving assets data and a demo scene.",
+    "displayName": "Assistive Cards SDK",
+    "unity": "2021.3",
+    "dependencies": {
+        "com.unity.textmeshpro": "3.0.6"
+    },
+    "author": {
+        "name": "Assistive Cards"
+    },
+    "samples": [
+        {
+            "displayName": "Demo Scene",
+            "description": "Contains demo scene for the Assistive Cards SDK.",
+            "path": "Samples~/DemoScene"
+        }
+    ]
+}
