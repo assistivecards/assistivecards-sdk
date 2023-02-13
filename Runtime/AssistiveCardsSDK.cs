@@ -3,8 +3,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 using System;
 using System.Threading.Tasks;
+using System.IO;
+using UnityEditor;
 
-namespace AssistiveCardsSDK{
+namespace AssistiveCardsSDK
+{
     public class AssistiveCardsSDK : MonoBehaviour
     {
         private int boyAvatarArrayLength = 33;
@@ -192,11 +195,30 @@ namespace AssistiveCardsSDK{
             public string vi;
         }
 
+        [Serializable]
+        public class Game
+        {
+            public string slug;
+            public string name;
+            public Tagline tagline;
+            public Description description;
+            public StoreId storeId;
+            public bool released;
+            public bool premium;
+        }
+
+        [Serializable]
+        public class Games
+        {
+            public List<Game> games;
+        }
+
         public Packs packs = new Packs();
         public Cards cards = new Cards();
         public Activities activities = new Activities();
         public Languages languages = new Languages();
         public Apps apps = new Apps();
+        public Games games = new Games();
 
         private async void Awake()
         {
@@ -209,6 +231,7 @@ namespace AssistiveCardsSDK{
             activities = await GetActivities("en");
             languages = await GetLanguages();
             apps = await GetApps();
+            games = GetGames();
         }
 
         ///<summary>
@@ -465,6 +488,32 @@ namespace AssistiveCardsSDK{
             }
         }
 
+        public async Task<Texture2D> GetGameIcon(string gameSlug)
+        {
+            var result = await asyncGetGameIcon(gameSlug);
+            return result;
+        }
+
+        private async Task<Texture2D> asyncGetGameIcon(string gameSlug)
+        {
+
+            string uri = api + "games/icon/" + gameSlug + "@2x.png";
+
+            UnityWebRequest request = UnityWebRequestTexture.GetTexture(uri);
+            request.SendWebRequest();
+            while (!request.isDone)
+            {
+                await Task.Yield();
+            }
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+                return null;
+            else
+            {
+                var texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
+                return texture;
+            }
+        }
+
         ///<summary>
         ///Takes in a pack slug of type string as the first parameter, a card slug of type string as the second parameter and an optional image size of type integer as the third parameter. Returns an object of type Texture2D corresponding to the specified pack slug, card slug and image size.
         ///</summary>
@@ -529,6 +578,23 @@ namespace AssistiveCardsSDK{
                 var apps = JsonUtility.FromJson<Apps>(request.downloadHandler.text);
                 return apps;
             }
+        }
+
+        public Games GetGames()
+        {
+            string path = Path.Combine(Application.persistentDataPath, "games.txt");
+
+            if (File.Exists(path))
+            {
+                string gamesJson = File.ReadAllText(path);
+                var games = JsonUtility.FromJson<Games>(gamesJson);
+                return games;
+            }
+            else
+            {
+                return null;
+            }
+
         }
 
         ///<summary>
