@@ -582,18 +582,9 @@ namespace AssistiveCardsSDK
 
         public Games GetGames()
         {
-            string path = Path.Combine(Application.persistentDataPath, "games.txt");
-
-            if (File.Exists(path))
-            {
-                string gamesJson = File.ReadAllText(path);
-                var games = JsonUtility.FromJson<Games>(gamesJson);
-                return games;
-            }
-            else
-            {
-                return null;
-            }
+            var textFile = Resources.Load<TextAsset>("games");
+            var games = JsonUtility.FromJson<Games>(textFile.text);
+            return games;
 
         }
 
