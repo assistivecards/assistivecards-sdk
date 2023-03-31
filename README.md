@@ -1,10 +1,6 @@
-# assistivecards-sdk
-
-C# sdk for assistivecards api
-
 # AssistiveCards SDK
 
-This is a documentation for the AssistiveCards SDK, this module will be accessible from anywhere in game.
+This is a documentation for the AssistiveCards SDK, this module will be accessible from anywhere in game, C# sdk for assistivecards api
 
 ## GetPacks
 
