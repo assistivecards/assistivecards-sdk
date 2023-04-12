@@ -15,6 +15,7 @@ namespace AssistiveCardsSDK
         private int miscAvatarArrayLength = 29;
         private const string api = "https://api.assistivecards.com/";
         private const string metadata = "https://api.assistivecards.com/apps/metadata.json";
+        private const string status = "https://api.assistivecards.com/status.json";
 
         [Serializable]
         public class Pack
@@ -213,12 +214,22 @@ namespace AssistiveCardsSDK
             public List<Game> games;
         }
 
+        [Serializable]
+        public class Status
+        {
+            public bool status;
+            public string hotlink;
+            public string version;
+            public int versionCode;
+        }
+
         public Packs packs = new Packs();
         public Cards cards = new Cards();
         public Activities activities = new Activities();
         public Languages languages = new Languages();
         public Apps apps = new Apps();
         public Games games = new Games();
+        public Status connectionStatus = new Status();
 
         private async void Awake()
         {
@@ -232,6 +243,7 @@ namespace AssistiveCardsSDK
             languages = await GetLanguages();
             apps = await GetApps();
             games = GetGames();
+            connectionStatus = await CheckConnectionStatus();
         }
 
         ///<summary>
@@ -691,6 +703,29 @@ namespace AssistiveCardsSDK
                 return textures;
             }
             return null;
+        }
+
+        public async Task<Status> CheckConnectionStatus()
+        {
+            var result = await asyncCheckConnectionStatus();
+            return result;
+        }
+
+        private async Task<Status> asyncCheckConnectionStatus()
+        {
+            UnityWebRequest request = UnityWebRequest.Get(status);
+            request.SendWebRequest();
+            while (!request.isDone)
+            {
+                await Task.Yield();
+            }
+            if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+                return null;
+            else
+            {
+                var status = JsonUtility.FromJson<Status>(request.downloadHandler.text);
+                return status;
+            }
         }
     }
 
