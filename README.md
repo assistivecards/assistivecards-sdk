@@ -6,6 +6,21 @@ C# sdk for assistivecards api
 
 This is a documentation for the AssistiveCards SDK, this module will be accessible from anywhere in game.
 
+## CheckConnectionStatus
+
+Returns an object of type Status which holds information about network connection.
+
+```Csharp
+async Task<Status> CheckConnectionStatus()
+```
+
+Example usage;
+
+```Csharp
+Status status = new Status();
+status = await CheckConnectionStatus();
+```
+
 ## GetPacks
 
 Takes in a language code of type string and returns an object of type Packs which holds an array of Pack objects in the specified language.
@@ -226,6 +241,36 @@ Example usage;
 ```Csharp
 Texture2D texture;
 texture = await GetAppIcon("leeloo");
+```
+
+## GetGames
+
+Returns an object of type Games which holds a list of Game objects.
+
+```Csharp
+Games GetGames()
+```
+
+Example usage;
+
+```Csharp
+Games games = new Games();
+games = GetGames();
+```
+
+## GetGameIcon
+
+Takes in a game slug of type string and returns an object of type Texture2D corresponding to the specified game slug.
+
+```Csharp
+async Task<Texture2D> GetGameIcon(string gameSlug)
+```
+
+Example usage;
+
+```Csharp
+Texture2D texture;
+texture = await GetGameIcon("memory");
 ```
 
 ## GetCardImagesByPack

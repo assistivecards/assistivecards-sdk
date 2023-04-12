@@ -500,6 +500,9 @@ namespace AssistiveCardsSDK
             }
         }
 
+        ///<summary>
+        ///Takes in a game slug of type string and returns an object of type Texture2D corresponding to the specified game slug.
+        ///</summary>
         public async Task<Texture2D> GetGameIcon(string gameSlug)
         {
             var result = await asyncGetGameIcon(gameSlug);
@@ -592,6 +595,9 @@ namespace AssistiveCardsSDK
             }
         }
 
+        ///<summary>
+        ///Returns an object of type Games which holds a list of Game objects.
+        ///</summary>
         public Games GetGames()
         {
             var textFile = Resources.Load<TextAsset>("games");
@@ -705,6 +711,9 @@ namespace AssistiveCardsSDK
             return null;
         }
 
+        ///<summary>
+        ///Returns an object of type Status which holds information about network connection.
+        ///</summary>
         public async Task<Status> CheckConnectionStatus()
         {
             var result = await asyncCheckConnectionStatus();
