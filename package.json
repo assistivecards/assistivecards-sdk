@@ -1,6 +1,6 @@
 {
     "name": "com.assistivecards.sdk",
-    "version": "1.0.0",
+    "version": "1.4.0",
     "description": "This package consists of methods for retrieving assets data and a demo scene.",
     "displayName": "Assistive Cards SDK",
     "unity": "2021.3",
