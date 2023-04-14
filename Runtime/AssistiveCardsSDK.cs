@@ -197,10 +197,52 @@ namespace AssistiveCardsSDK
         }
 
         [Serializable]
+        public class Name
+        {
+            public string en;
+            public string es;
+            public string fr;
+            public string de;
+            public string it;
+            public string ja;
+            public string ko;
+            public string zh;
+            public string ar;
+            public string cs;
+            public string da;
+            public string nl;
+            public string fi;
+            public string el;
+            public string he;
+            public string hi;
+            public string hu;
+            public string id;
+            public string nb;
+            public string pl;
+            public string pt;
+            public string ro;
+            public string ru;
+            public string sk;
+            public string sv;
+            public string th;
+            public string tr;
+            public string ur;
+            public string bn;
+            public string et;
+            public string fil;
+            public string jv;
+            public string km;
+            public string ne;
+            public string si;
+            public string uk;
+            public string vi;
+        }
+
+        [Serializable]
         public class Game
         {
             public string slug;
-            public string name;
+            public Name name;
             public Tagline tagline;
             public Description description;
             public StoreId storeId;
