@@ -248,6 +248,8 @@ namespace AssistiveCardsSDK
             public StoreId storeId;
             public bool released;
             public bool premium;
+            public string color;
+
         }
 
         [Serializable]
