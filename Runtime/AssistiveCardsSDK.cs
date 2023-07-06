@@ -516,11 +516,11 @@ namespace AssistiveCardsSDK
         }
 
         ///<summary>
-        ///Takes in an app slug of type string and returns an object of type Texture2D corresponding to the specified app slug.
+        ///Takes in an app slug of type string as the first parameter and an optional image size of type integer as the second parameter. Returns an object of type Texture2D corresponding to the specified app slug and image size.
         ///</summary>
         public async Task<Texture2D> GetAppIcon(string appSlug, int imgSize = 1024)
         {
-            var result = await asyncGetAppIcon(appSlug);
+            var result = await asyncGetAppIcon(appSlug, imgSize);
             return result;
         }
 
@@ -557,7 +557,7 @@ namespace AssistiveCardsSDK
         }
 
         ///<summary>
-        ///Takes in a game slug of type string and returns an object of type Texture2D corresponding to the specified game slug.
+        ///Takes in a game slug of type string as the first parameter and an optional image size of type integer as the second parameter. Returns an object of type Texture2D corresponding to the specified game slug and image size.
         ///</summary>
         public async Task<Texture2D> GetGameIcon(string gameSlug, int imgSize = 1024)
         {
