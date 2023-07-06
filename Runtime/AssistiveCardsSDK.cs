@@ -518,16 +518,28 @@ namespace AssistiveCardsSDK
         ///<summary>
         ///Takes in an app slug of type string and returns an object of type Texture2D corresponding to the specified app slug.
         ///</summary>
-        public async Task<Texture2D> GetAppIcon(string appSlug)
+        public async Task<Texture2D> GetAppIcon(string appSlug, int imgSize = 1024)
         {
             var result = await asyncGetAppIcon(appSlug);
             return result;
         }
 
-        private async Task<Texture2D> asyncGetAppIcon(string appSlug)
+        private async Task<Texture2D> asyncGetAppIcon(string appSlug, int imgSize = 1024)
         {
+            string uri = "";
 
-            string uri = api + "apps/icon/" + appSlug + "@3x.png";
+            if (imgSize == 683)
+            {
+                uri = api + "apps/icon/" + appSlug + "@2x.png";
+            }
+            else if (imgSize == 1024)
+            {
+                uri = api + "apps/icon/" + appSlug + "@3x.png";
+            }
+            else
+            {
+                Debug.Log("Please enter a valid image size.");
+            }
 
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(uri);
             request.SendWebRequest();
@@ -547,16 +559,28 @@ namespace AssistiveCardsSDK
         ///<summary>
         ///Takes in a game slug of type string and returns an object of type Texture2D corresponding to the specified game slug.
         ///</summary>
-        public async Task<Texture2D> GetGameIcon(string gameSlug)
+        public async Task<Texture2D> GetGameIcon(string gameSlug, int imgSize = 1024)
         {
-            var result = await asyncGetGameIcon(gameSlug);
+            var result = await asyncGetGameIcon(gameSlug, imgSize);
             return result;
         }
 
-        private async Task<Texture2D> asyncGetGameIcon(string gameSlug)
+        private async Task<Texture2D> asyncGetGameIcon(string gameSlug, int imgSize = 1024)
         {
+            string uri = "";
 
-            string uri = api + "games/icon/" + gameSlug + "@2x.png";
+            if (imgSize == 256)
+            {
+                uri = api + "games/icon/" + gameSlug + "@0.5x.png";
+            }
+            else if (imgSize == 1024)
+            {
+                uri = api + "games/icon/" + gameSlug + "@2x.png";
+            }
+            else
+            {
+                Debug.Log("Please enter a valid image size.");
+            }
 
             UnityWebRequest request = UnityWebRequestTexture.GetTexture(uri);
             request.SendWebRequest();
