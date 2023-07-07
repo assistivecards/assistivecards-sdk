@@ -528,7 +528,11 @@ namespace AssistiveCardsSDK
         {
             string uri = "";
 
-            if (imgSize == 683)
+            if (imgSize == 342)
+            {
+                uri = api + "apps/icon/" + appSlug + ".png";
+            }
+            else if (imgSize == 683)
             {
                 uri = api + "apps/icon/" + appSlug + "@2x.png";
             }
@@ -572,6 +576,10 @@ namespace AssistiveCardsSDK
             if (imgSize == 256)
             {
                 uri = api + "games/icon/" + gameSlug + "@0.5x.png";
+            }
+            else if (imgSize == 512)
+            {
+                uri = api + "games/icon/" + gameSlug + ".png";
             }
             else if (imgSize == 1024)
             {
